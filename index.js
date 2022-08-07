@@ -5,6 +5,7 @@ const expHbs = require('express-handlebars')
 const session = require('express-session') // avtorizatsiya registratsiya qilish uchun
 const flash = require('connect-flash')  // avtorizatsiya registratsiya qilish uchun
 const csrf = require('csurf')  // avtorizatsiya registratsiya qilish uchun
+const varMid = require('./middleware/var')
 
 
 // routers
@@ -43,6 +44,7 @@ app.use(session({
 }))
 app.use(csrf())
 app.use(flash())
+app.use(varMid)
 
 
 // routerlarni bog'lash

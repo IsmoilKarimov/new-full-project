@@ -9,6 +9,9 @@ const csrf = require('csurf')  // avtorizatsiya registratsiya qilish uchun
 
 // routers
 const pageRouter = require('./router/page')
+const userRouter = require('./router/user')
+
+
 const hbs = expHbs.create({
     defaultLayout: 'front',
     extname: 'hbs'
@@ -41,9 +44,11 @@ app.use(session({
 app.use(csrf())
 app.use(flash())
 
+
+// routerlarni bog'lash
 app.use(pageRouter)
-
-
+app.use('/user', userRouter)
+ 
 const PORT = 3003
 async function dev(){
     try {

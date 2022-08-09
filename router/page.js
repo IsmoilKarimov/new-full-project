@@ -3,8 +3,8 @@ const router = Router()
 const auth = require('../middleware/auth')
 
 router.get('/',(req,res)=>{
-    res.render('back/index',{ 
-        layout: 'back'
+    res.render('front/index',{ 
+         
     })
 })
 

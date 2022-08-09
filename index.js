@@ -3,10 +3,10 @@ const app = express()
 const mongoose = require('mongoose')
 const expHbs = require('express-handlebars')
 const session = require('express-session') // avtorizatsiya registratsiya qilish uchun
+const MongoStore = require('connect-mongodb-session')(session)
 const flash = require('connect-flash')  // avtorizatsiya registratsiya qilish uchun
 const csrf = require('csurf')  // avtorizatsiya registratsiya qilish uchun
 const varMid = require('./middleware/var')
-
 
 // routers
 const pageRouter = require('./router/page')
@@ -33,6 +33,13 @@ app.post('/',(req,res)=>{
     `)
 })
 
+const mongoURI = 'mongodb://127.0.0.1:27017/news'
+
+const store = new MongoStore({
+    collection: 'session',
+    uri: mongoURI
+})
+
 app.use(session({
     secret:'Biror bir mahfiy kalit',  // ikki kishi orasida o'rnatilgan mahfiy kalit so'z
     saveUninitialized: false, // tizimdan log out qilganda save qilishni so'rash
@@ -40,7 +47,8 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 10, 
         secure: false
     },
-    resave: true
+    resave: true,
+    store
 }))
 app.use(csrf())
 app.use(flash())
@@ -55,7 +63,7 @@ app.use('/category', categoryRouter)
 const PORT = 3003
 async function dev(){
     try {
-        await mongoose.connect('mongodb://127.0.0.1:27017/news',{
+        await mongoose.connect(mongoURI,{
             useNewUrlParser:true
         }),
         app.listen(PORT,()=>{

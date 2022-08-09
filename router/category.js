@@ -5,6 +5,12 @@ const auth = require('../middleware/auth')
 
 router.get('/',auth,async(req,res)=> {
     let categories = await Category.find().lean()
+    categories.map(category => {
+        category.status = category.status == 1 ?'<span class="badge badge-primary">Faol</span>':'<span class="badge badge-danger">Nofaol</span>'
+        category.menu = category.menu == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
+        category.footer = category.footer == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
+        return category
+    })
     res.render('back/category/index',{
         title: 'Bo`limlar ro`yhati',
         layout: 'back',
@@ -23,5 +29,14 @@ router.post('/',auth,async(req,res)=>{
     req.flash('success','Bo`lim qo`shildi')
     res.redirect('/category')
 })
+
+router.get('/delete/:id', async(req,res)=> {
+    let _id = req.params.id
+    await Category.findByIdAndRemove({_id})
+    req.flash('success','Bo`lim o`chirildi')
+    res.redirect('/category')
+})
+
+// router.get()
 
 module.exports = router

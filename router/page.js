@@ -10,8 +10,9 @@ router.get('/',(req,res)=>{
 
 router.get('/admin',auth,(req,res)=>{
     res.render('back/index',{
-        layout: 'back'
-    })
+        layout: 'back',
+        isAdmin:true
+    }) 
 })
 
 

@@ -1,10 +1,10 @@
 /* Write your custom CSS here */
-.alert {
+.alert.flash {
     position: fixed;
     top: 10px;
     right: 10px;
     transition: .4s;
 }
-.alert.hide {
+.alert.flash.hide {
     right: -400px;
 }

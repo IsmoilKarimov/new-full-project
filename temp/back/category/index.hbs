@@ -1,0 +1,77 @@
+<div class="card">
+    <div class="card-body">
+       <div class="d-flex align-items-center justify-content-between mb-4">
+             <h5 class="card-title mb-0">{{title}}</h5>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Yangi bo'lim
+            </button>
+       </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">№</th>
+                    <th scope="col">Sarlavhasi</th>
+                    <th scope="col">Holati</th>
+                    <th scope="col">Menu</th>
+                    <th scope="col">Footer</th>
+                    <th scope="col">Tartib raqami</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each categories}}
+                <tr>
+                    <th scope="row">{{@index}}</th>
+                    <td>{{title}}</td>
+                    <td>{{status}}</td>
+                    <td>{{menu}}</td>
+                    <td>{{footer}}</td>
+                    <td>{{order}}</td>
+                    <td></td>
+                </tr>
+                {{/each }}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Yangi bo'lim</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/category" method="post">
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <div class="form-group mb-2">
+                        <input type="text" name="title" class="form-control" placeholder="Bo'lim sarlavhasi">
+                    </div>
+                    <div class="form-group mb-2">
+                        <input type="text" name="order" class="form-control" placeholder="Tartib raqami">
+                    </div>
+                    <div class="custom-control custom-checkbox form-group">
+                        <input type="checkbox" name="status" value="1" class="custom-control-input" id="status" checked>
+                        <label class="custom-control-label" for="status">Faol</label>
+                    </div>
+                    <div class="custom-control custom-checkbox form-group">
+                        <input type="checkbox" name="menu" value="1" class="custom-control-input" id="menu" checked>
+                        <label class="custom-control-label" for="menu">Menuda chiqarish</label>
+                    </div>
+                    <div class="custom-control custom-checkbox form-group">
+                        <input type="checkbox" name="footer" value="1" class="custom-control-input" id="footer" checked>
+                        <label class="custom-control-label" for="footer">Footerda chiqarish</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Kiritish</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>

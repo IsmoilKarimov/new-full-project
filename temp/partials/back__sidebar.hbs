@@ -8,11 +8,11 @@
             <li class="sidebar-title">
                 Apps
             </li>
-            <li class="active-page">
-                <a href="index.html" class="active"><i class="material-icons-outlined">dashboard</i>Dashboard</a>
+            <li {{#if isAdmin}}class="active-page"{{/if}}>
+                <a href="/admin" {{#if isAdmin}}class="active"{{/if}}><i class="material-icons-outlined">dashboard</i>Bosh sahifa</a>
             </li>
-            <li>
-                <a href="mailbox.html"><i class="material-icons-outlined">inbox</i>Mailbox</a>
+            <li {{#if isCategory}}class="active-page"{{/if}}>
+                <a href="/category" {{#if isCategory}}class="active"{{/if}}><i class="material-icons-outlined">inbox</i>Bo'limlar</a>
             </li>
             <li>
                 <a href="profile.html"><i class="material-icons-outlined">account_circle</i>Profile</a>

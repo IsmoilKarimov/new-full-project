@@ -11,7 +11,7 @@ const varMid = require('./middleware/var')
 // routers
 const pageRouter = require('./router/page')
 const userRouter = require('./router/user')
-
+const categoryRouter = require('./router/category')
 
 const hbs = expHbs.create({
     defaultLayout: 'front',
@@ -50,6 +50,7 @@ app.use(varMid)
 // routerlarni bog'lash
 app.use(pageRouter)
 app.use('/user', userRouter)
+app.use('/category', categoryRouter)
  
 const PORT = 3003
 async function dev(){

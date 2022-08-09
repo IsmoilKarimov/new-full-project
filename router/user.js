@@ -9,6 +9,13 @@ router.get('/',async(req,res)=>{
     })
 })
 
+router.get('/logout',(req,res)=>{
+    req.session.destroy(err => {
+        if(err) throw err
+        res.redirect('/user/login')
+    })
+})
+
 router.get('/login',async(req,res)=>{
     res.render('back/user/signIn',{
         success: req.flash('success'),
@@ -30,7 +37,7 @@ router.post('/login',async(req,res)=>{
                 login: checkUser.login,
                 img: checkUser.img
             }
-            req.session.isAuthed = true
+            req.session.isAuthed = true             
             req.session.save((err)=>{
                 if(err) throw err
                 else res.redirect('/admin')

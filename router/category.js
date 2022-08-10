@@ -30,13 +30,45 @@ router.post('/',auth,async(req,res)=>{
     res.redirect('/category')
 })
 
-router.get('/delete/:id', async(req,res)=> {
+router.get('/delete/:id',auth,async(req,res)=> {
     let _id = req.params.id
     await Category.findByIdAndRemove({_id})
     req.flash('success','Bo`lim o`chirildi')
     res.redirect('/category')
 })
 
-// router.get()
+router.post('/save',auth,async(req,res)=>{
+    let {_id,order,title} = req.body
+    let category = await Category.findOne({_id})
+    category.title = title
+    category.order = order
+    await Category.findByIdAndUpdate(_id,category)
+    req.flash('success','Bo`lim qo`shildi!')
+    res.redirect('/category')
+})
+
+// api 
+router.get('/get/:id',async(req,res)=>{         
+    let _id = req.params.id
+    let category = await Category.findOne({_id})
+    res.send(category)
+})
+
+router.get('/all',async(req,res)=>{
+    let statusCategory = await Category.find({status:1}).lean()
+    let menuCategory = await Category.find({menu:1}).lean()
+    let footerCategory = await Category.find({footer:1}).lean()
+    res.send({statusCategory,menuCategory,footerCategory})
+})
+
+router.get('/change/:type/:id',auth,async(req,res)=>{   
+    let _id = req.params.id
+    let type = req.params.type
+    let category = await Category.findOne({_id})
+    category[type] = category[type] == 0 ? 1 : 0
+    await category.save()
+    res.redirect('/category')   
+    
+})
 
 module.exports = router

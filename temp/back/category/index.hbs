@@ -23,12 +23,12 @@
                 <tr>
                     <th scope="row">{{@index}}</th>
                     <td>{{title}}</td>
-                    <td>{{{status}}}</td>
-                    <td>{{{menu}}}</td>
-                    <td>{{{footer}}}</td>
+                    <td><a href="/category/change/status/{{_id}}">{{{status}}}</a></td>
+                    <td><a href="/category/change/menu/{{_id}}">{{{menu}}}</a></td>
+                    <td><a href="/category/change/footer/{{_id}}">{{{footer}}}</a></td>
                     <td>{{order}}</td>
                     <td class="text-right">
-                        <button onclick="edit('{{_id}}')" data-toggle="modal" data-target="#updata" class="btn btn-warning"><i class="fas fa-pen"></i></button>
+                        <button onclick="edit('{{_id}}')" data-toggle="modal" data-target="#update" class="btn btn-warning"><i class="fas fa-pen"></i></button>
 
                         <a href="/category/delete/{{_id}}" onclick="return confirm('Qaroringiz aniqmi?')" class="btn btn-danger ml-2"><i class="fas fa-times"></i></a>
                     </td>
@@ -80,18 +80,19 @@
     </div>
 </div>
 
-<div class="modal fade" id="updata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade " id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true" style="display: none;">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Yangi bo'lim</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tahrirlash</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <i class="material-icons">close</i>
                 </button>
             </div>
-            <div class="modal-body">
-                <form action="/category" method="post">
+            <div class="modal-body mb-4">
+                <form action="/category/save" method="post" name="editform">
+                    <input type="hidden" name="_id">
                     <input type="hidden" name="_csrf" value="{{csrf}}">
                     <div class="form-group mb-2">
                         <input type="text" name="title" class="form-control" placeholder="Bo'lim sarlavhasi">
@@ -99,24 +100,23 @@
                     <div class="form-group mb-2">
                         <input type="text" name="order" class="form-control" placeholder="Tartib raqami">
                     </div>
-                    <div class="custom-control custom-checkbox form-group">
-                        <input type="checkbox" name="status" value="1" class="custom-control-input" id="status" checked>
-                        <label class="custom-control-label" for="status">Faol</label>
-                    </div>
-                    <div class="custom-control custom-checkbox form-group">
-                        <input type="checkbox" name="menu" value="1" class="custom-control-input" id="menu" checked>
-                        <label class="custom-control-label" for="menu">Menuda chiqarish</label>
-                    </div>
-                    <div class="custom-control custom-checkbox form-group">
-                        <input type="checkbox" name="footer" value="1" class="custom-control-input" id="footer" checked>
-                        <label class="custom-control-label" for="footer">Footerda chiqarish</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Kiritish</button>
+                    <button type="submit" class="btn btn-primary">Saqlash</button>
                 </form>
-            </div>
-            <div class="modal-footer">
-
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    let form = document.forms.editform
+    const edit = (id) => {
+        fetch(`/category/get/${id}`)
+        .then(res => res.json())
+        .then(category => {
+            form._id.value = category._id
+            form.title.value = category.title
+            form.order.value = category.order
+        })
+    }
+    
+</script>

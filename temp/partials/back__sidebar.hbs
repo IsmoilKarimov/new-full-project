@@ -14,8 +14,8 @@
             <li {{#if isCategory}}class="active-page"{{/if}}>
                 <a href="/category" {{#if isCategory}}class="active"{{/if}}><i class="material-icons-outlined">inbox</i>Bo'limlar</a>
             </li>
-            <li>
-                <a href="profile.html"><i class="material-icons-outlined">account_circle</i>Profile</a>
+            <li {{#if isAuthor}}class="active-page"{{/if}}>
+                <a href="/author" {{#if isAuthor}}class="active"{{/if}}><i class="material-icons-outlined">account_circle</i>Mualliflar</a>
             </li>
             <li>
                 <a href="file-manager.html"><i class="material-icons">cloud_queue</i>File Manager</a>

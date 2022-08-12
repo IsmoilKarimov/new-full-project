@@ -1,4 +1,5 @@
 const {Schema,model} = require('mongoose')
+
 const category = new Schema({
     title: String,
     status: {

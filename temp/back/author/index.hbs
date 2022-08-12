@@ -1,0 +1,114 @@
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h5 class="card-title mb-0">{{title}}</h5>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Yangi muallif
+            </button>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">№</th>
+                    <th scope="col">Muallif rasmi</th>
+                    <th scope="col">Muallif ism-familyasi</th>
+                    <th scope="col">Holati</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each authors}}
+                <tr>
+                    <th scope="row">{{@index}}</th>
+                    <td>
+                        <img src="{{avatar}}" alt="" width="50">
+                    </td>
+                    <td>{{name}}</td>
+                    <td><a href="/author/change/{{_id}}/">{{{status}}}</a></td>
+                    <td class="text-right">
+                        <button onclick="edit('{{_id}}')" data-toggle="modal" data-target="#update"
+                            class="btn btn-warning"><i class="fas fa-pen"></i></button>
+
+                        <a href="/author/delete/{{_id}}" onclick="return confirm('Qaroringiz aniqmi?')"
+                            class="btn btn-danger ml-2"><i class="fas fa-times"></i></a>
+                    </td>
+                </tr>
+                {{/each }}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Yangi muallif</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body mb-4">
+                <form action="/author/?_csrf={{csrf}}" method="post" enctype="multipart/form-data">
+                    {{!-- <input type="hidden" name="_csrf" value="{{csrf}}"> --}}
+                    <div class="form-group mb-2">
+                        <input type="text" name="name" class="form-control" placeholder="Muallif ism-familyasi">
+                    </div>
+                    <div class="form-group mb-2">
+                        <input type="file" name="avatar" class="form-control">
+                    </div>                                
+                    <div class="custom-control custom-checkbox form-group">
+                        <input type="checkbox" name="status" value="1" class="custom-control-input" id="status" checked>
+                        <label class="custom-control-label" for="status">Faol</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Kiritish</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    style="display: none;">
+    <div class="modal-dialog" role="document">              
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tahrirlash</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">                                    
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body mb-4">
+                <form action="/author/save/?_csrf={{csrf}}" method="post" name="editform" enctype="multipart/form-data">
+                    <input type="hidden" name="_id">
+                    {{!-- <input type="hidden" name="_csrf" value="{{csrf}}"> --}}
+                    <div class="form-group mb-2">
+                        <input type="text" name="name" class="form-control" placeholder="Muallif ism-familyasi">
+                    </div>
+                    <div class="form-group mb-2">
+                        <input type="file" name="avatar" class="form-control">
+                    </div>
+                    <div class="form-group mb-2">
+                        <img src="" alt="" id="avatar" width="70">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Saqlash</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let form = document.forms.editform
+    let avatar = document.getElementById('avatar')
+    const edit = (id) => {  
+        fetch(`/author/${id}`)
+            .then(res => res.json()) 
+            .then(author => {
+                form._id.value = author._id 
+                form.name.value = author.name 
+                avatar.setAttribute('src',author.avatar)
+            })
+    }
+</script>

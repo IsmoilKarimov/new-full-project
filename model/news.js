@@ -2,6 +2,14 @@ const {Schema,model, Types} = require('mongoose')
 
 const news = new Schema({
     title: String,
+    category: {
+        type: Schema.Types.ObjectId,
+        ref: "Category"
+    },
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: "Author"
+    },
     text: String,
     description: String,
     cratedAt: {
@@ -13,14 +21,7 @@ const news = new Schema({
         default:0
     },
     hashList:String,
-    category: {
-        type: Schema.Types.ObjectId,
-        ref: "Category"
-    },
-    author: {
-        type: Schema.Types.ObjectId,
-        ref: "Author"
-    },
+    img: String,
     popular: {
         type:Number,
         default: 0
@@ -54,10 +55,14 @@ const news = new Schema({
             createdAt: {
                 type:Date,
                 default: Date.now()
+            },
+            status: {
+                type:Number,
+                default: 0
             }
         }
     ],
-    img: String,
+    
 
 })
 

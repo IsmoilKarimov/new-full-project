@@ -5,24 +5,24 @@ const upload = require('../middleware/file')
 const News = require('../model/news')
 const Category = require('../model/category')
 const Author = require('../model/author')
-const News = require('../model/news')
 
 router.get('/',auth,async(req,res)=>{
-    const news = await News.find().lean()
-    const categorie = await Category.find({status:1}).lean()
-    const author = await Author.find({status:1}).lean()
-    news.map(news =>{
-        news.status = news.status == 1 ?'<span class="badge badge-primary">Faol</span>':'<span class="badge badge-danger">Nofaol</span>'
-    })
+    let news = await News.find().populate('category').populate('author').lean()
+    let category = await Category.find({status:1}).lean()
+    let author = await Author.find({status:1}).lean()
+    news.map(newsEl =>{
+        newsEl.status = newsEl.status == 1 ?'<span class="badge badge-primary">Faol</span>':'<span class="badge badge-danger">Nofaol</span>'
+        return newsEl
+    })          
     res.render('back/news/index',{
         title: 'Yangiliklar ro`yhati',
         news,
         isNews: true,
         layout: 'back',
-        categorie,
+        category,
         author
     })
-})  
+})
 
 router.post('/',auth,upload.single('img'),async(req,res)=>{  
     let {name,status} = req.body    
@@ -62,8 +62,9 @@ router.get('/:id',async(req,res)=>{
     res.send(news)
 })
 
-router.get('/change/:id', async(req,res)=>{
+router.get('/change/types/:id', async(req,res)=>{
     let _id = req.params.id
+    let types = req.params.types
     let news = await News.findOne({_id})
     news.status = news.status == 0 ? 1 : 0
     await news.save()

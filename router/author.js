@@ -5,9 +5,10 @@ const upload = require('../middleware/file')
 const Author = require('../model/author')
 
 router.get('/',auth,async(req,res)=>{
-    const authors = await Author.find().lean()
+    let authors = await Author.find().lean()
     authors.map(author =>{
         author.status = author.status == 1 ?'<span class="badge badge-primary">Faol</span>':'<span class="badge badge-danger">Nofaol</span>'
+        return author
     })
     res.render('back/author/index',{
         title: 'Mualliflar ro`yhati',

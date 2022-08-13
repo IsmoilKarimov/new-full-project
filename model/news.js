@@ -12,7 +12,7 @@ const news = new Schema({
     },
     text: String,
     description: String,
-    cratedAt: {
+    createdAt: {
         type: Date,
         default:Date.now()
     },

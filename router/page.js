@@ -14,9 +14,9 @@ router.get('/',async(req,res)=>{
     .lean()
 
     sliderNews = sliderNews.map(slider =>{
-        // console.log(slider)
         let newDate = new Date(slider.createdAt)
         slider.createdAt = `${newDate.getDate()}-${newDate.getUTCMonth()}-${newDate.getFullYear()}`
+        console.log(newDate);
         return slider
     })
 

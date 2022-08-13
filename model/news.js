@@ -42,6 +42,10 @@ const news = new Schema({
         type:Number,
         default: 0
     },
+    slider: {
+        type:Number,
+        default: 0
+    },
     status: {
         type:Number,
         default: 0

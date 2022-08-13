@@ -13,9 +13,9 @@
                     <th scope="col">Sarlavha</th>
                     <th scope="col">Bo'lim</th>
                     <th scope="col">Muallif</th>
-                    <th scope="col">Bo'lim</th>
                     <th scope="col">Ko'rishlar soni</th>
                     <th scope="col">Holati</th>
+                    <th scope="col">Slider</th>
                     <th scope="col">Top</th>
                     <th scope="col">Hot</th>
                     <th scope="col">Popular</th>
@@ -34,6 +34,7 @@
                     <td>{{author.name}}</td>
                     <td>{{view}}</td>
                     <td><a href="/news/change/status/{{_id}}/">{{{status}}}</a></td>
+                    <td><a href="/news/change/slider/{{_id}}/">{{{slider}}}</a></td>
                     <td><a href="/news/change/top/{{_id}}/">{{{top}}}</a></td>
                     <td><a href="/news/change/hot/{{_id}}/">{{{hot}}}</a></td>
                     <td><a href="/news/change/popular/{{_id}}/">{{{popular}}}</a></td>
@@ -107,23 +108,61 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="form-group mb-2">
+                            <div class="form-group mb-4">
                                 <label for="img">Maqola rasmi</label>
                                 <input type="file" id="img" name="img" class="form-control">
                             </div> 
                         </div>
                         <div class="col-6">
-                            <div class="form-group mb-2">
+                            <div class="form-group mb-4">
                                 <label for="hashList">Maqola hashteglari (vergul bilan ajrating)</label>
                                 <input type="text" name="hashList" id="hashList" class="form-control">
                             </div> 
                         </div>
+                        <div class="col-2">
+                            <div class="custom-control custom-checkbox form-group">
+                                <input type="checkbox" name="status" value="1" class="custom-control-input" id="status" checked>
+                                <label class="custom-control-label" for="status">Faol</label>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="custom-control custom-checkbox form-group">
+                                <input type="checkbox" name="slider" value="1" class="custom-control-input" id="slider" checked>
+                                <label class="custom-control-label" for="slider">Slider</label>
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <div class="custom-control custom-checkbox form-group">
+                                <input type="checkbox" name="top" value="1" class="custom-control-input" id="top" checked>
+                                <label class="custom-control-label" for="top">Top</label>
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <div class="custom-control custom-checkbox form-group">
+                                <input type="checkbox" name="hot" value="1" class="custom-control-input" id="hot" checked>
+                                <label class="custom-control-label" for="hot">Hot</label>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="custom-control custom-checkbox form-group">
+                                <input type="checkbox" name="popular" value="1" class="custom-control-input" id="popular" checked>
+                                <label class="custom-control-label" for="popular">Popular</label>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="custom-control custom-checkbox form-group">
+                                <input type="checkbox" name="bigpopular" value="1" class="custom-control-input" id="bigpopular" checked>
+                                <label class="custom-control-label" for="bigpopular">BigPopular</label>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="custom-control custom-checkbox form-group">
+                                <input type="checkbox" name="topweek" value="1" class="custom-control-input" id="topweek" checked>
+                                <label class="custom-control-label" for="topweek">TopWeek</label>
+                            </div>
+                        </div>
                     </div>
                                                    
-                    <div class="custom-control custom-checkbox form-group">
-                        <input type="checkbox" name="status" value="1" class="custom-control-input" id="status" checked>
-                        <label class="custom-control-label" for="status">Faol</label>
-                    </div>
                     <button type="submit" class="btn btn-primary">Kiritish</button>
                 </form>
             </div>

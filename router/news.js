@@ -25,13 +25,19 @@ router.get('/',auth,async(req,res)=>{
 })
 
 router.post('/',auth,upload.single('img'),async(req,res)=>{  
-    let {name,status} = req.body    
+    let {title,category,slider,author,text,description,createdAt,view,hashList,popular,bigpopular,hot,top,topweek,status} = req.body    
     let img = 'no-image'
     status = status || 0
+    popular = popular || 0
+    bigpopular = bigpopular || 0
+    top = top || 0
+    hot = hot || 0
+    slider = slider || 0
+    topweek = topweek || 0
     if(req.file){                               
         img = req.file.path
     }
-    let newNews = await new News({name,status,img})
+    let newNews = await new News({title,category,author,slider,text,description,createdAt,view,hashList,popular,bigpopular,hot,top,topweek,status,img})
     await newNews.save()
     req.flash('success','Yangi maqola qo`shildi!')
     res.redirect('/news')

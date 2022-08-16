@@ -1,0 +1,211 @@
+<div class="section-post">
+    <div class="wrapper">
+        <div class="pagetitle">
+            <div class="h1">Post</div>
+        </div>
+        <div class="breadcrumbs">
+            <a href="/">Bosh sahifa</a> <span class="dash"></span> <a href="/category/show/{{news.category._id}}">{{news.category.title}}</a> <span class="dash"></span> <span>{{news.title}}</span>
+        </div>
+        <div class="columns">
+            <div class="columns_center">
+                <article class="article">
+                    <div class="article_cover">
+                        <img src="/{{news.img}}" alt="" />
+                        <a href="/category/show/{{news.category._id}}" class="cats_item">{{news.category.title}}</a>
+                    </div>
+                    <div class="article_infoline infoline">
+                        <div class="infoline_date">{{news.createdAt}}</div> <span class="dash"></span>
+                        <div class="infoline_author">
+                            <div class="ava"><img data-src="/{{news.author.avatar}}"
+                                    src="/{{news.author.avatar}}" class="js-img" alt="" /></div>
+                            {{news.author.name}}
+                        </div>
+                    </div>
+                    <div class="article_txt">
+                        <h1>{{news.title}}</h1>
+                        {{news.text}}
+                    </div>
+                    <div class="article_tags">
+                        <div class="article_tags_title">Tags:</div>
+                        <a href="blog.html">#Travel</a> <span class="dash"></span> <a href="blog.html">#holiday</a>
+                        <span class="dash"></span> <a href="blog.html">#hobby</a>
+                    </div>
+                    <div class="author">
+                        <div class="author_img"><img data-src="img/ava.png"
+                                src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt="" /></div>
+                        <div class="author_cont">
+                            <div class="author_name">Marie Caphlish</div>
+                            <div class="author_txt">Web developer since 2006. Create hundreds of websites, HTML and CSS3
+                                expert, who started to learn web design on a <span class="nowrap">world-class</span>
+                                level. </div>
+                        </div>
+                    </div>
+                </article>
+                <div class="comments_form">
+                    <h3>Leave a comment</h3>
+                    <form id="form">
+                        <div class="form_cols">
+                            <div class="form_cols_item">
+                                <div class="form_row">
+                                    <input type="text" class="form-control" placeholder="Your name" name="name" />
+                                </div>
+                            </div>
+                            <div class="form_cols_item">
+                                <div class="form_row">
+                                    <input type="tel" class="form-control" placeholder="+1 (___) ___ __ __"
+                                        name="tel" />
+                                </div>
+                            </div>
+                            <div class="form_cols_item">
+                                <div class="form_row">
+                                    <input type="email" class="form-control" placeholder="Your email" name="email" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <textarea class="form-control" placeholder="Enter your comment" name="comment"></textarea>
+                        </div>
+                        <div class="form_btn"><button class="btn">post comment</button></div>
+                    </form>
+                </div>
+                <a href="#" class="bann"><img data-src="img/bad1.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACw="
+                        class="js-img" alt="" /></a>
+            </div>
+            <aside class="columns_sidebar sidebar">
+                <div class="sidebar_search">
+                    <form>
+                        <div class="search">
+                            <input type="text" class="form-control" placeholder="Search..." />
+                            <button class="btn"><span class="icon-search"></span></button>
+                        </div>
+                    </form>
+                </div>
+                <div class="sidebar_widget">
+                    <h3>Recent stories</h3>
+                    <div class="stories">
+                        <div class="stories_item">
+                            <div class="stories_item_img"><a href="article.html"><img data-src="img/img2.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt="" /></a>
+                            </div>
+                            <div class="stories_item_infoline infoline">
+                                <div class="infoline_date">Jul 06, 2021</div> <span class="dash"></span>
+                                <div class="infoline_tag">#pets</div>
+                            </div>
+                            <div class="stories_item_title"><a href="article.html">fresh home photo session. see how we
+                                    love our pets</a></div>
+                        </div>
+                        <div class="stories_item">
+                            <div class="stories_item_img"><a href="article.html"><img data-src="img/img3.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt="" /></a>
+                            </div>
+                            <div class="stories_item_infoline infoline">
+                                <div class="infoline_date">Jul 06, 2021</div> <span class="dash"></span>
+                                <div class="infoline_tag">#garden</div>
+                            </div>
+                            <div class="stories_item_title"><a href="article.html">the best ideas for decorating living
+                                    areas in your garden</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar_widget">
+                    <h3>Categories</h3>
+                    <div class="cats">
+                        <a href="blog.html" class="cats_item">travel</a><a href="blog.html"
+                            class="cats_item">electronics</a><a href="blog.html" class="cats_item">office</a>
+                        <a href="blog.html" class="cats_item">garden</a><a href="blog.html" class="cats_item">web</a><a
+                            href="blog.html" class="cats_item">community</a>
+                        <a href="blog.html" class="cats_item">development</a><a href="#"
+                            class="cats_item">business</a><a href="blog.html" class="cats_item">home</a>
+                        <a href="blog.html" class="cats_item">app</a><a href="blog.html" class="cats_item">fashion</a><a
+                            href="blog.html" class="cats_item">pets</a>
+                        <a href="blog.html" class="cats_item">books</a><a href="blog.html"
+                            class="cats_item">kitchen</a><a href="blog.html" class="cats_item">hobby</a>
+                        <a href="blog.html" class="cats_item">Holiday </a><a href="blog.html"
+                            class="cats_item">Baby</a><a href="blog.html" class="cats_item">Software</a>
+                        <a href="blog.html" class="cats_item">Health</a><a href="blog.html"
+                            class="cats_item">Appliences</a><a href="blog.html" class="cats_item">cars</a>
+                        <a href="blog.html" class="cats_item">design</a><a href="blog.html"
+                            class="cats_item">money</a><a href="blog.html" class="cats_item">art</a>
+                        <a href="blog.html" class="cats_item">science</a><a href="blog.html"
+                            class="cats_item">marketing</a><a href="blog.html" class="cats_item">digital</a>
+                    </div>
+                </div>
+                <a href="#" class="bann"><img data-src="img/bad2.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACw="
+                        class="js-img" alt="" /></a>
+                <div class="sidebar_widget">
+                    <h3>Follow us</h3>
+                    <div class="soc">
+                        <div class="soc_item">
+                            <a href="#" target="_blank">
+                                <span class="soc_item_icon"><span class="icon-fb"></span></span>
+                                <span class="soc_item_txt">2,1 k+</span>
+                            </a>
+                        </div>
+                        <div class="soc_item">
+                            <a href="#" target="_blank">
+                                <span class="soc_item_icon"><span class="icon-tw"></span></span>
+                                <span class="soc_item_txt">3,6 k+</span>
+                            </a>
+                        </div>
+                        <div class="soc_item">
+                            <a href="#" target="_blank">
+                                <span class="soc_item_icon"><span class="icon-youtube"></span></span>
+                                <span class="soc_item_txt">2,8 k+</span>
+                            </a>
+                        </div>
+                        <div class="soc_item">
+                            <a href="#" target="_blank">
+                                <span class="soc_item_icon"><span class="icon-instagram"></span></span>
+                                <span class="soc_item_txt">6,3 k+</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar_widget">
+                    <h3>Popular posts</h3>
+                    <div class="popular">
+                        <div class="popular_item">
+                            <div class="popular_item_img"><a href="article.html"><img data-src="img/img4.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt="" /></a>
+                            </div>
+                            <div class="popular_item_cont">
+                                <div class="popular_item_title"><a href="article.html">the best indoor plants to create
+                                        comfort ...</a></div>
+                                <div class="popular_item_infoline infoline">
+                                    <div class="infoline_date">Jul 06</div> <span class="dash"></span>
+                                    <div class="infoline_tag"><span class="icon-comm"></span>5</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="popular_item">
+                            <div class="popular_item_img"><a href="article.html"><img data-src="img/img5.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt="" /></a>
+                            </div>
+                            <div class="popular_item_cont">
+                                <div class="popular_item_title"><a href="article.html">a set of the most necessary
+                                        things ...</a></div>
+                                <div class="popular_item_infoline infoline">
+                                    <div class="infoline_date">Jul 06</div> <span class="dash"></span>
+                                    <div class="infoline_tag"><span class="icon-comm"></span>5</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="popular_item">
+                            <div class="popular_item_img"><a href="article.html"><img data-src="img/img6.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt="" /></a>
+                            </div>
+                            <div class="popular_item_cont">
+                                <div class="popular_item_title"><a href="article.html">only here are the most beautiful
+                                        sunsets</a></div>
+                                <div class="popular_item_infoline infoline">
+                                    <div class="infoline_date">Jul 06</div> <span class="dash"></span>
+                                    <div class="infoline_tag"><span class="icon-comm"></span>5</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

@@ -93,13 +93,16 @@ router.get('/view/:id',auth,async(req,res)=>{
 router.get('/show/:id', async(req,res)=>{
     let _id = req.params.id
     let news = await News.findOne({_id})
-    .populate('category')
-    .populate('author')
-    .lean()                 
+    .populate('category')   
+    .populate('author') 
+    .lean()       
+    news.view += 1
+    await News.findByIdAndUpdate(_id,news)         
     let newDate = new Date(news.createdAt)
     news.createdAt = `${newDate.getDate()}-${newDate.getUTCMonth()}-${newDate.getFullYear()}`
-    res.redirect('front/news/show',{            
-        title: `${news.title} | Tez24`      
+    res.render('front/news/show',{
+        title: `${news.title} | Tez24`,
+        news
     })
 })
 

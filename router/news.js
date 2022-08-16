@@ -90,6 +90,19 @@ router.get('/view/:id',auth,async(req,res)=>{
     })   
 })
 
+router.get('/show/:id', async(req,res)=>{
+    let _id = req.params.id
+    let news = await News.findOne({_id})
+    .populate('category')
+    .populate('author')
+    .lean()                 
+    let newDate = new Date(news.createdAt)
+    news.createdAt = `${newDate.getDate()}-${newDate.getUTCMonth()}-${newDate.getFullYear()}`
+    res.redirect('front/news/show',{            
+        title: `${news.title} | Tez24`      
+    })
+})
+
 router.get('/delete/:id',auth,async(req,res)=>{
     let _id = req.params.id
     await News.findByIdAndRemove({_id})

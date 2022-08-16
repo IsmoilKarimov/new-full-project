@@ -15,7 +15,6 @@ router.get('/',async(req,res)=>{
     sliderNews = sliderNews.map(slider =>{
         let newDate = new Date(slider.createdAt)
         slider.createdAt = `${newDate.getDate()}-${newDate.getUTCMonth()}-${newDate.getFullYear()}`
-        console.log(newDate);
         return slider
     })
 
@@ -30,7 +29,6 @@ router.get('/',async(req,res)=>{
     recentNews = recentNews.map(slider =>{
         let newDate = new Date(slider.createdAt)
         slider.createdAt = `${newDate.getDate()}-${newDate.getUTCMonth()}-${newDate.getFullYear()}`
-        console.log(newDate);
         return slider
     })
    
@@ -46,7 +44,6 @@ router.get('/',async(req,res)=>{
     recentSideNews = recentSideNews.map(slider =>{
         let newDate = new Date(slider.createdAt)
         slider.createdAt = `${newDate.getDate()}-${newDate.getUTCMonth()}-${newDate.getFullYear()}`
-        console.log(newDate);
         return slider
     })
 

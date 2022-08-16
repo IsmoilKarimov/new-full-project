@@ -12,6 +12,12 @@ router.get('/',auth,async(req,res)=>{
     let author = await Author.find({status:1}).lean()
     news.map(newsEl =>{
         newsEl.status = newsEl.status == 1 ?'<span class="badge badge-primary">Faol</span>':'<span class="badge badge-danger">Nofaol</span>'
+        newsEl.popular = newsEl.popular == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
+        newsEl.bigpopular = newsEl.bigpopular == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
+        newsEl.top = newsEl.top == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
+        newsEl.hot = newsEl.hot == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
+        newsEl.topweek = newsEl.topweek == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
+        newsEl.slider = newsEl.slider == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
         return newsEl
     })          
     res.render('back/news/index',{
@@ -55,6 +61,25 @@ router.post('/save',auth,upload.single('img'),async(req,res)=>{
     res.redirect('/news')
 })
 
+
+router.get('/view/:id',auth,async(req,res)=>{
+    let _id = req.params.id
+    let newsEl = await News.findOne({_id}).lean()
+    newsEl.status = newsEl.status == 1 ?'<span class="badge badge-primary">Faol</span>':'<span class="badge badge-danger">Nofaol</span>'
+    newsEl.popular = newsEl.popular == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
+    newsEl.bigpopular = newsEl.bigpopular == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
+    newsEl.top = newsEl.top == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
+    newsEl.hot = newsEl.hot == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
+    newsEl.topweek = newsEl.topweek == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
+    newsEl.slider = newsEl.slider == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
+    res.render('back/news/view',{
+        news: newsEl,
+        layout: 'back',
+        title: `${newsEl.title} maqola batafsil sahifasi`,
+        isNews: true
+    })   
+})
+
 router.get('/delete/:id',auth,async(req,res)=>{
     let _id = req.params.id
     await News.findByIdAndRemove({_id})
@@ -68,13 +93,20 @@ router.get('/:id',async(req,res)=>{
     res.send(news)
 })
 
-router.get('/change/types/:id', async(req,res)=>{
+router.get('/change/:type/:id/:view',auth,async(req,res)=>{
     let _id = req.params.id
-    let types = req.params.types
+    let type = req.params.type
+    let redir = req.params.view
     let news = await News.findOne({_id})
-    news.status = news.status == 0 ? 1 : 0
+    news[type] = news[type] == 0 ? 1 : 0
     await news.save()
-    res.redirect('/news') 
+
+    if(redir == 'view'){
+        res.redirect('/news/view/'+_id)
+    }
+    else {
+        res.redirect('/news') 
+    }
 })
 
 module.exports = router

@@ -10,7 +10,7 @@ router.get('/',auth,async(req,res)=> {
         category.menu = category.menu == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
         category.footer = category.footer == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
         return category
-    })
+    }) 
     res.render('back/category/index',{
         title: 'Bo`limlar ro`yhati',
         layout: 'back',
@@ -29,6 +29,7 @@ router.post('/',auth,async(req,res)=>{
     req.flash('success','Bo`lim qo`shildi')
     res.redirect('/category')
 })
+
 
 router.get('/delete/:id',auth,async(req,res)=> {
     let _id = req.params.id
@@ -63,12 +64,11 @@ router.get('/all',async(req,res)=>{
 
 router.get('/change/:type/:id',auth,async(req,res)=>{   
     let _id = req.params.id
-    let type = req.params.type
+    let type = req.params.type     
     let category = await Category.findOne({_id})
     category[type] = category[type] == 0 ? 1 : 0
     await category.save()
     res.redirect('/category')   
-    
 })
 
 module.exports = router

@@ -15,39 +15,29 @@
                     <th scope="col">Muallif</th>
                     <th scope="col">Ko'rishlar soni</th>
                     <th scope="col">Holati</th>
-                    <th scope="col">Slider</th>
                     <th scope="col">Top</th>
                     <th scope="col">Hot</th>
                     <th scope="col">Popular</th>
                     <th scope="col">Big popular</th>
                     <th scope="col">Top week</th>
                     <th scope="col">Izohlar</th>
-                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 {{#each news}}
                 <tr>
                     <th scope="row">{{@index}}</th>
-                    <td>{{title}}</td>
+                    <td><a href="/news/view/{{_id}}">{{title}}</a></td>
                     <td>{{category.title}}</td>
                     <td>{{author.name}}</td>
                     <td>{{view}}</td>
-                    <td><a href="/news/change/status/{{_id}}/">{{{status}}}</a></td>
-                    <td><a href="/news/change/slider/{{_id}}/">{{{slider}}}</a></td>
-                    <td><a href="/news/change/top/{{_id}}/">{{{top}}}</a></td>
-                    <td><a href="/news/change/hot/{{_id}}/">{{{hot}}}</a></td>
-                    <td><a href="/news/change/popular/{{_id}}/">{{{popular}}}</a></td>
-                    <td><a href="/news/change/bigpopular/{{_id}}/">{{{bigpopular}}}</a></td>
-                    <td><a href="/news/change/topweek/{{_id}}/">{{{topweek}}}</a></td>
-                    <td><a href="/news/change/comments/{{_id}}/">{{{comments.length}}}</a></td>
-                    <td class="text-right">
-                        <button onclick="edit('{{_id}}')" data-toggle="modal" data-target="#update"
-                            class="btn btn-warning"><i class="fas fa-pen"></i></button>
-
-                        <a href="/news/delete/{{_id}}" onclick="return confirm('Qaroringiz aniqmi?')"
-                            class="btn btn-danger ml-2"><i class="fas fa-times"></i></a>
-                    </td>
+                    <td><a href="/news/change/status/{{_id}}/news">{{{status}}}</a></td>
+                    <td><a href="/news/change/top/{{_id}}/news">{{{top}}}</a></td>
+                    <td><a href="/news/change/hot/{{_id}}/news">{{{hot}}}</a></td>
+                    <td><a href="/news/change/popular/{{_id}}/news">{{{popular}}}</a></td>
+                    <td><a href="/news/change/bigpopular/{{_id}}/news">{{{bigpopular}}}</a></td>
+                    <td><a href="/news/change/topweek/{{_id}}/news">{{{topweek}}}</a></td>
+                    <td><a href="/news/change/comments/{{_id}}/news">{{{comments.length}}}</a></td>
                 </tr>
                 {{/each }}
             </tbody>

@@ -1,0 +1,51 @@
+<div class="d-flex align-items-center mb-4">
+    <h5 class="card-title">{{news.title}}</h5>
+    <button onclick="edit('{{_id}}')" class="btn btn-warning ml-auto">Tahrirlash</button>
+    <a href="/news/delete/{{_id}}" class="btn btn-danger ml-2"
+        onclick="return confirm('Qaroringiz aniqmi?')">O'chirish</a>
+</div>
+<div class="row">
+    <div class="col-6">
+        <div class="card">
+            <img src="/{{news.img}}" class="card-img-top" alt="Placeholder">
+            <div class="card-body">
+                <div class="row">
+                    <div class="d-flex justify-content-between flex-wrap">
+                        <div class="col-4 d-flex justify-content-between">
+                            Status:
+                            <a href="/news/change/status/{{news._id}}/view">{{{news.status}}}</a>
+                        </div>
+                        <div class="col-4 d-flex justify-content-between mb-2">
+                            Sliderda chiqishi:
+                            <a href="/news/change/slider/{{news._id}}/view">{{{news.slider}}}</a>
+                        </div>
+                        <div class="col-4 d-flex justify-content-between mb-2">
+                            Ommabop yangilik:
+                            <a href="/news/change/popular/{{news._id}}/view">{{{news.popular}}}</a>
+                        </div>
+                        <div class="col-4 d-flex justify-content-between mb-2">
+                            Ommabop katta yangilik:
+                            <a href="/news/change/bigpopular/{{news._id}}/view">{{{news.bigpopular}}}</a>
+                        </div>
+                        <div class="col-4 d-flex justify-content-between mb-2">
+                            Top yangilik:
+                            <a href="/news/change/top/{{news._id}}/view">{{{news.top}}}</a>
+                        </div>
+                        <div class="col-4 d-flex justify-content-between mb-2">
+                            Qaynoq yanglik:
+                            <a href="/news/change/hot/{{news._id}}/view">{{{news.hot}}}</a>
+                        </div>
+                        <div class="col-4 d-flex justify-content-between mb-2">
+                            Hafta top yangiligi:
+                            <a href="/news/change/topweek/{{news._id}}/view">{{{news.topweek}}}</a>
+                        </div>
+                    </div>
+                </div>
+                <p class="card-text mt-3">
+                    {{news.description}}
+                </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+</div>

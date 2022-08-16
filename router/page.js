@@ -12,7 +12,6 @@ router.get('/',async(req,res)=>{
     .populate('author')
     .populate('category')
     .lean()
-
     sliderNews = sliderNews.map(slider =>{
         let newDate = new Date(slider.createdAt)
         slider.createdAt = `${newDate.getDate()}-${newDate.getUTCMonth()}-${newDate.getFullYear()}`
@@ -20,8 +19,41 @@ router.get('/',async(req,res)=>{
         return slider
     })
 
+    let recentNews = await News
+    .find({status:1})
+    .sort({_id:-1})
+    .limit(3)
+    .populate('author')
+    .populate('category')
+    .select(['title','_id','img','createdAt','category','author','description'])
+    .lean()
+    recentNews = recentNews.map(slider =>{
+        let newDate = new Date(slider.createdAt)
+        slider.createdAt = `${newDate.getDate()}-${newDate.getUTCMonth()}-${newDate.getFullYear()}`
+        console.log(newDate);
+        return slider
+    })
+   
+    let recentSideNews = await News
+    .find({status:1})
+    .sort({_id:-1})
+    .skip(3)
+    .limit(3)
+    .populate('author')
+    .populate('category')
+    .select(['title','_id','img','createdAt','category','author','description'])
+    .lean()
+    recentSideNews = recentSideNews.map(slider =>{
+        let newDate = new Date(slider.createdAt)
+        slider.createdAt = `${newDate.getDate()}-${newDate.getUTCMonth()}-${newDate.getFullYear()}`
+        console.log(newDate);
+        return slider
+    })
+
     res.render('front/index',{ 
-        sliderNews
+        sliderNews,
+        recentNews,
+        recentSideNews
     })
 })
 

@@ -7,7 +7,12 @@ const Category = require('../model/category')
 const Author = require('../model/author')
 
 router.get('/',auth,async(req,res)=>{
-    let news = await News.find().populate('category').populate('author').lean()
+    let news = await News
+    .find()
+    .sort({_id:-1})
+    .populate('category')
+    .populate('author')
+    .lean()
     let category = await Category.find({status:1}).lean()
     let author = await Author.find({status:1}).lean()
     news.map(newsEl =>{
@@ -64,7 +69,12 @@ router.post('/save',auth,upload.single('img'),async(req,res)=>{
 
 router.get('/view/:id',auth,async(req,res)=>{
     let _id = req.params.id
-    let newsEl = await News.findOne({_id}).lean()
+    let newsEl = await News
+    .findOne({_id})
+    .populate('category')
+    .populate('author')
+    .lean()
+    newsEl.createdAt = newsEl.createdAt.toLocaleString()
     newsEl.status = newsEl.status == 1 ?'<span class="badge badge-primary">Faol</span>':'<span class="badge badge-danger">Nofaol</span>'
     newsEl.popular = newsEl.popular == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
     newsEl.bigpopular = newsEl.bigpopular == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'

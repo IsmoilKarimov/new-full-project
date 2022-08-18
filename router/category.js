@@ -2,6 +2,7 @@ const {Router} = require('express')
 const router = Router()
 const Category = require('../model/category')
 const auth = require('../middleware/auth')
+const News = require('../model/news')
 
 router.get('/',auth,async(req,res)=> {
     let categories = await Category.find().lean()
@@ -30,7 +31,6 @@ router.post('/',auth,async(req,res)=>{
     res.redirect('/category')
 })
 
-
 router.get('/delete/:id',auth,async(req,res)=> {
     let _id = req.params.id
     await Category.findByIdAndRemove({_id})
@@ -41,8 +41,8 @@ router.get('/delete/:id',auth,async(req,res)=> {
 router.post('/save',auth,async(req,res)=>{
     let {_id,order,title} = req.body
     let category = await Category.findOne({_id})
-    category.title = title
-    category.order = order
+    category.title = title  
+    category.order = order  
     await Category.findByIdAndUpdate(_id,category)
     req.flash('success','Bo`lim qo`shildi!')
     res.redirect('/category')
@@ -53,6 +53,31 @@ router.get('/get/:id',async(req,res)=>{
     let _id = req.params.id
     let category = await Category.findOne({_id})
     res.send(category)
+})
+
+router.get('/show/:id', async(req,res)=>{
+    let _id = req.params.id
+    
+    let category = await Category.findOne({_id}).lean()
+    
+    let news = await News.find({_id})
+    .where({status:1})
+    .sort({_id:-1})
+    .populate('category')
+    .populate('author')
+    .lean()
+    
+    news = news.map(other => {
+        let newDate = new Date(other.createdAt)
+        other.createdAt = `${newDate.getDate()}-${newDate.getUTCMonth()}-${newDate.getFullYear()}`          
+        return other
+    })
+
+    res.render('front/category/index',{
+        title: `${category.title} yangiliklar`,
+        category,   
+        news
+    })
 })
 
 router.get('/all',async(req,res)=>{

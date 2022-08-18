@@ -5,6 +5,7 @@ const upload = require('../middleware/file')
 const News = require('../model/news')
 const Category = require('../model/category')
 const Author = require('../model/author')
+const category = require('../model/category')
 
 router.get('/',auth,async(req,res)=>{
     let news = await News
@@ -93,16 +94,48 @@ router.get('/view/:id',auth,async(req,res)=>{
 router.get('/show/:id', async(req,res)=>{
     let _id = req.params.id
     let news = await News.findOne({_id})
-    .populate('category')   
+    .populate('category')
     .populate('author') 
     .lean()       
     news.view += 1
     await News.findByIdAndUpdate(_id,news)         
     let newDate = new Date(news.createdAt)
     news.createdAt = `${newDate.getDate()}-${newDate.getUTCMonth()}-${newDate.getFullYear()}`
+
+    let others = await News
+    .find({category: news.category._id})
+    .where({status:1})
+    .where({_id: {$ne:_id}})
+    .limit(2)
+    .sort({_id:-1})
+    .lean()
+
+    others = others.map(other => {
+        let newDate = new Date(other.createdAt)
+        other.createdAt = `${newDate.getDate()}-${newDate.getUTCMonth()}-${newDate.getFullYear()}`
+        return other
+    })
+
+    let categories = await Category.find({status:1}).lean()
+
+    let popular = await News.find({status:1, popular:1})
+    .where({_id: {$ne:_id}})
+    .limit(3)
+    .sort({_id:-1})
+    .lean()
+
+    popular = popular.map(other => {
+        let newDate = new Date(other.createdAt)
+        other.createdAt = `${newDate.getDate()}-${newDate.getUTCMonth()}`
+        return other
+    })
+
     res.render('front/news/show',{
         title: `${news.title} | Tez24`,
-        news
+        news,
+        others,
+        categories,
+        popular
     })
 })
 

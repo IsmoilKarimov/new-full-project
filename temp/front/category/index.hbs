@@ -1,0 +1,172 @@
+<section class="section-post">
+    <div class="wrapper">
+        <div class="pagetitle">
+            <h1>{{category.title}}</h1>
+        </div>
+        <div class="breadcrumbs">
+            <a href="/">Bosh sahifa</a> <span class="dash"></span> <span>{{category.title}}</span>
+        </div>
+        <div class="columns">
+            <div class="columns_center">
+                <div class="article article_list">
+                    {{#each news}}
+                    <div class="article_item">
+                        <div class="article_item_cover">
+                            <a href="/news/show/{{_id}}"><img src="/{{img}}" alt=""></a>
+                            <a href="/category/show/{{_id}}" class="cats_item">{{category.title}}</a>
+                        </div>
+                        <div class="article_infoline infoline">
+                            <div class="infoline_date">{{createdAt}}</div> <span class="dash"></span>
+                            <div class="infoline_author">
+                                <div class="ava"><img data-src="/{{author.avatar}}" src="/{{author.avatar}}" class="js-img" alt="">
+                                </div>
+                                {{author.name}}
+                            </div>
+                        </div>
+                        <div class="article_txt">
+                            <div class="article_title h2"><a href="/news/show/{{_id}}">{{title}}</a></div>
+                            <div class="article_desc">{{description}}</div>
+                            <div class="article_btn"><a href="/news/show/{{_id}}" class="btn">Batafsil</a></div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                <div class="pagenavi">
+                    <span class="current">1</span>
+                    <a href="#">2</a>
+                    <a href="#"><span class="icon-arrow"></span></a>
+                </div>
+                <a href="#" class="bann"><img data-src="img/bad1.jpg" src="img/bad1.jpg" class="js-img" alt=""></a>
+            </div>
+            <aside class="columns_sidebar sidebar">
+                <div class="sidebar_search">
+                    <form>
+                        <div class="search">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <button class="btn"><span class="icon-search"></span></button>
+                        </div>
+                    </form>
+                </div>
+                <div class="sidebar_widget">
+                    <h3>Recent stories</h3>
+                    <div class="stories">
+                        <div class="stories_item">
+                            <div class="stories_item_img"><a href="article.html"><img data-src="img/img2.jpg"
+                                        src="img/img2.jpg" class="js-img" alt=""></a></div>
+                            <div class="stories_item_infoline infoline">
+                                <div class="infoline_date">Jul 06, 2021</div> <span class="dash"></span>
+                                <div class="infoline_tag">#pets</div>
+                            </div>
+                            <div class="stories_item_title"><a href="article.html">fresh home photo session. see how we
+                                    love our pets</a></div>
+                        </div>
+                        <div class="stories_item">
+                            <div class="stories_item_img"><a href="article.html"><img data-src="img/img3.jpg"
+                                        src="img/img3.jpg" class="js-img" alt=""></a></div>
+                            <div class="stories_item_infoline infoline">
+                                <div class="infoline_date">Jul 06, 2021</div> <span class="dash"></span>
+                                <div class="infoline_tag">#garden</div>
+                            </div>
+                            <div class="stories_item_title"><a href="article.html">the best ideas for decorating living
+                                    areas in your garden</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar_widget">
+                    <h3>Categories</h3>
+                    <div class="cats">
+                        <a href="blog.html" class="cats_item">travel</a><a href="blog.html"
+                            class="cats_item">electronics</a><a href="blog.html" class="cats_item">office</a>
+                        <a href="blog.html" class="cats_item">garden</a><a href="blog.html" class="cats_item">web</a><a
+                            href="blog.html" class="cats_item">community</a>
+                        <a href="blog.html" class="cats_item">development</a><a href="#"
+                            class="cats_item">business</a><a href="blog.html" class="cats_item">home</a>
+                        <a href="blog.html" class="cats_item">app</a><a href="blog.html" class="cats_item">fashion</a><a
+                            href="blog.html" class="cats_item">pets</a>
+                        <a href="blog.html" class="cats_item">books</a><a href="blog.html"
+                            class="cats_item">kitchen</a><a href="blog.html" class="cats_item">hobby</a>
+                        <a href="blog.html" class="cats_item">Holiday </a><a href="blog.html"
+                            class="cats_item">Baby</a><a href="blog.html" class="cats_item">Software</a>
+                        <a href="blog.html" class="cats_item">Health</a><a href="blog.html"
+                            class="cats_item">Appliences</a><a href="blog.html" class="cats_item">cars</a>
+                        <a href="blog.html" class="cats_item">design</a><a href="blog.html"
+                            class="cats_item">money</a><a href="blog.html" class="cats_item">art</a>
+                        <a href="blog.html" class="cats_item">science</a><a href="blog.html"
+                            class="cats_item">marketing</a><a href="blog.html" class="cats_item">digital</a>
+                    </div>
+                </div>
+                <a href="#" class="bann"><img data-src="img/bad2.jpg" src="img/bad2.jpg" class="js-img" alt=""></a>
+                <div class="sidebar_widget">
+                    <h3>Follow us</h3>
+                    <div class="soc">
+                        <div class="soc_item">
+                            <a href="#" target="_blank">
+                                <span class="soc_item_icon"><span class="icon-fb"></span></span>
+                                <span class="soc_item_txt">2,1 k+</span>
+                            </a>
+                        </div>
+                        <div class="soc_item">
+                            <a href="#" target="_blank">
+                                <span class="soc_item_icon"><span class="icon-tw"></span></span>
+                                <span class="soc_item_txt">3,6 k+</span>
+                            </a>
+                        </div>
+                        <div class="soc_item">
+                            <a href="#" target="_blank">
+                                <span class="soc_item_icon"><span class="icon-youtube"></span></span>
+                                <span class="soc_item_txt">2,8 k+</span>
+                            </a>
+                        </div>
+                        <div class="soc_item">
+                            <a href="#" target="_blank">
+                                <span class="soc_item_icon"><span class="icon-instagram"></span></span>
+                                <span class="soc_item_txt">6,3 k+</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar_widget">
+                    <h3>Popular posts</h3>
+                    <div class="popular">
+                        <div class="popular_item">
+                            <div class="popular_item_img"><a href="article.html"><img data-src="img/img4.jpg"
+                                        src="img/img4.jpg" class="js-img" alt=""></a></div>
+                            <div class="popular_item_cont">
+                                <div class="popular_item_title"><a href="article.html">the best indoor plants to create
+                                        comfort ...</a></div>
+                                <div class="popular_item_infoline infoline">
+                                    <div class="infoline_date">Jul 06</div> <span class="dash"></span>
+                                    <div class="infoline_tag"><span class="icon-comm"></span>5</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="popular_item">
+                            <div class="popular_item_img"><a href="article.html"><img data-src="img/img5.jpg"
+                                        src="img/img5.jpg" class="js-img" alt=""></a></div>
+                            <div class="popular_item_cont">
+                                <div class="popular_item_title"><a href="article.html">a set of the most necessary
+                                        things ...</a></div>
+                                <div class="popular_item_infoline infoline">
+                                    <div class="infoline_date">Jul 06</div> <span class="dash"></span>
+                                    <div class="infoline_tag"><span class="icon-comm"></span>5</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="popular_item">
+                            <div class="popular_item_img"><a href="article.html"><img data-src="img/img6.jpg"
+                                        src="img/img6.jpg" class="js-img" alt=""></a></div>
+                            <div class="popular_item_cont">
+                                <div class="popular_item_title"><a href="article.html">only here are the most beautiful
+                                        sunsets</a></div>
+                                <div class="popular_item_infoline infoline">
+                                    <div class="infoline_date">Jul 06</div> <span class="dash"></span>
+                                    <div class="infoline_tag"><span class="icon-comm"></span>5</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>

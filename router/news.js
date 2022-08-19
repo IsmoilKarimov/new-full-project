@@ -146,6 +146,16 @@ router.get('/delete/:id',auth,async(req,res)=>{
     res.redirect('/news')
 })
 
+router.post('/newcomment/:id', async(req,res)=>{
+    let {name,email,text,phone} = req.body
+    let _id = req.params.id
+    let news = await News.findOne({_id})
+    news.comments.push({name,email,text,phone})
+    await news.save()
+    req.flash('success','Izohingiz saqlandi, tez orada ko`rib chiqiladi!')
+    res.redirect(`/news/show/${_id}`)
+})
+
 router.get('/:id',async(req,res)=>{
     let _id = req.params.id
     let news = await News.findOne({_id}).lean()

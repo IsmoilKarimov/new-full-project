@@ -1,7 +1,7 @@
 const {Router} = require('express')
 const router = Router()
-const Category = require('../model/category')
 const auth = require('../middleware/auth')
+const Category = require('../model/category')
 const News = require('../model/news')
 
 router.get('/',auth,async(req,res)=> {
@@ -57,12 +57,18 @@ router.get('/get/:id',async(req,res)=>{
 
 router.get('/show/:id', async(req,res)=>{
     let _id = req.params.id
-    
+    let skip = req.query.page
+    skip *= 3
+
+    let allNews = await News.find({category: _id}).select(['_id']).lean()
+    let count = Math.ceil(allNews.length/3)
+
     let category = await Category.findOne({_id}).lean()
-    
-    let news = await News.find({_id})
+    let news = await News.find({category: _id})
     .where({status:1})
+    .limit(3)
     .sort({_id:-1})
+    .skip(skip)
     .populate('category')
     .populate('author')
     .lean()
@@ -73,10 +79,42 @@ router.get('/show/:id', async(req,res)=>{
         return other
     })
 
+    let others = await News
+    .find()
+    .where({status:1})
+    .where({_id: {$ne:_id}})
+    .limit(2)
+    .sort({_id:-1})
+    .lean()
+
+    others = others.map(other => {
+        let newDate = new Date(other.createdAt)
+        other.createdAt = `${newDate.getDate()}-${newDate.getUTCMonth()}-${newDate.getFullYear()}`
+        return other
+    })
+
+    let categories = await Category.find({status:1}).lean()
+
+    let popular = await News.find({status:1, popular:1})
+    .where({_id: {$ne:_id}})
+    .limit(3)
+    .sort({_id:-1})
+    .lean()
+
+    popular = popular.map(other => {
+        let newDate = new Date(other.createdAt)
+        other.createdAt = `${newDate.getDate()}-${newDate.getUTCMonth()}`
+        return other
+    })
+
     res.render('front/category/index',{
-        title: `${category.title} yangiliklar`,
-        category,   
-        news
+        title: `${category.title} yangiliklari`,
+        category,
+        news,
+        others,
+        categories,
+        popular,
+        count
     })
 })
 

@@ -5,7 +5,7 @@
         onclick="return confirm('Qaroringiz aniqmi?')">O'chirish</a>
 </div>
 <div class="row">
-    <div class="col-6">
+    <div class="col-8">
         <div class="card">
             <img src="/{{news.img}}" class="card-img-top" alt="Placeholder">
             <div class="card-body">
@@ -23,8 +23,8 @@
             </div>
         </div>
     </div>
-    <div class="col-3">
-        <div class="card">
+    <div class="col-4">
+        <div class="card sticky-top">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     Muallif:
@@ -79,3 +79,36 @@
         </div>
     </div>
 </div>
+
+<h4 class="mt-4 mb-3">Yangilikka yozilgan izohlar ro'yhati</h4>
+<div class="card">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">№</th>
+                <th scope="col">Ismi</th>
+                <th scope="col">Telefon raqami</th>
+                <th scope="col">Emaili</th>
+                <th scope="col">Izohi</th>
+                <th scope="col">Yaratilgan vaqti</th>
+                <th scope="col">Holati</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each news.comments}}
+                <tr>
+                    <td>{{@index}}</td>
+                    <td>{{name}}</td>
+                    <td>{{phone}}</td>
+                    <td>{{email}}</td>
+                    <td>{{text}}</td>
+                    <td>{{createdAt}}</td>
+                    <td>{{status}}</td>
+                    <td></td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+

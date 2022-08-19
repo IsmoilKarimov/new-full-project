@@ -31,10 +31,10 @@
                     </div>
                     {{/each}}
                 </div>
-                <div class="pagenavi">
-                    <span class="current">1</span>
+                <div class="pagenavi" data-count="{{count}}">
+                    {{!-- <span class="current">1</span>
                     <a href="#">2</a>
-                    <a href="#"><span class="icon-arrow"></span></a>
+                    <a href="#"><span class="icon-arrow"></span></a> --}}
                 </div>
                 <a href="#" class="bann"><img data-src="img/bad1.jpg" src="img/bad1.jpg" class="js-img" alt=""></a>
             </div>
@@ -42,60 +42,34 @@
                 <div class="sidebar_search">
                     <form>
                         <div class="search">
-                            <input type="text" class="form-control" placeholder="Search...">
+                            <input type="text" class="form-control" placeholder="Search..." />
                             <button class="btn"><span class="icon-search"></span></button>
                         </div>
                     </form>
                 </div>
                 <div class="sidebar_widget">
-                    <h3>Recent stories</h3>
+                    <h3>{{news.title}} yangiliklar</h3>
                     <div class="stories">
+                        {{#each others}}
                         <div class="stories_item">
-                            <div class="stories_item_img"><a href="article.html"><img data-src="img/img2.jpg"
-                                        src="img/img2.jpg" class="js-img" alt=""></a></div>
-                            <div class="stories_item_infoline infoline">
-                                <div class="infoline_date">Jul 06, 2021</div> <span class="dash"></span>
-                                <div class="infoline_tag">#pets</div>
+                            <div class="stories_item_img"><a href="/news/show/{{_id}}"><img data-src="/{{img}}" src="/{{img}}" class="js-img" alt="" /></a>
                             </div>
-                            <div class="stories_item_title"><a href="article.html">fresh home photo session. see how we
-                                    love our pets</a></div>
-                        </div>
-                        <div class="stories_item">
-                            <div class="stories_item_img"><a href="article.html"><img data-src="img/img3.jpg"
-                                        src="img/img3.jpg" class="js-img" alt=""></a></div>
                             <div class="stories_item_infoline infoline">
-                                <div class="infoline_date">Jul 06, 2021</div> <span class="dash"></span>
-                                <div class="infoline_tag">#garden</div>
+                                <div class="infoline_date">{{createdAt}}</div> <span class="dash"></span>
+                                <div class="infoline_tag">{{hashList}}</div>
                             </div>
-                            <div class="stories_item_title"><a href="article.html">the best ideas for decorating living
-                                    areas in your garden</a></div>
+                            <div class="stories_item_title"><a href="/news/show/{{_id}}">{{title}}</a></div>
                         </div>
+                        {{/each}}
                     </div>
                 </div>
-                <div class="sidebar_widget">
-                    <h3>Categories</h3>
-                    <div class="cats">
-                        <a href="blog.html" class="cats_item">travel</a><a href="blog.html"
-                            class="cats_item">electronics</a><a href="blog.html" class="cats_item">office</a>
-                        <a href="blog.html" class="cats_item">garden</a><a href="blog.html" class="cats_item">web</a><a
-                            href="blog.html" class="cats_item">community</a>
-                        <a href="blog.html" class="cats_item">development</a><a href="#"
-                            class="cats_item">business</a><a href="blog.html" class="cats_item">home</a>
-                        <a href="blog.html" class="cats_item">app</a><a href="blog.html" class="cats_item">fashion</a><a
-                            href="blog.html" class="cats_item">pets</a>
-                        <a href="blog.html" class="cats_item">books</a><a href="blog.html"
-                            class="cats_item">kitchen</a><a href="blog.html" class="cats_item">hobby</a>
-                        <a href="blog.html" class="cats_item">Holiday </a><a href="blog.html"
-                            class="cats_item">Baby</a><a href="blog.html" class="cats_item">Software</a>
-                        <a href="blog.html" class="cats_item">Health</a><a href="blog.html"
-                            class="cats_item">Appliences</a><a href="blog.html" class="cats_item">cars</a>
-                        <a href="blog.html" class="cats_item">design</a><a href="blog.html"
-                            class="cats_item">money</a><a href="blog.html" class="cats_item">art</a>
-                        <a href="blog.html" class="cats_item">science</a><a href="blog.html"
-                            class="cats_item">marketing</a><a href="blog.html" class="cats_item">digital</a>
-                    </div>
+                    <h3>Bo'limlar</h3>
+                    {{#each categories}}
+                        <a href="/category/show/{{_id}}" class="cats_item">{{title}}</a>
+                    {{/each}}
                 </div>
-                <a href="#" class="bann"><img data-src="img/bad2.jpg" src="img/bad2.jpg" class="js-img" alt=""></a>
+                <a href="#" class="bann"><img data-src="img/bad2.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACw="
+                        class="js-img" alt="" /></a>
                 <div class="sidebar_widget">
                     <h3>Follow us</h3>
                     <div class="soc">
@@ -126,47 +100,35 @@
                     </div>
                 </div>
                 <div class="sidebar_widget">
-                    <h3>Popular posts</h3>
+                    <h3>Mashhur yangiliklar</h3>
                     <div class="popular">
+                        {{#each popular}}
                         <div class="popular_item">
-                            <div class="popular_item_img"><a href="article.html"><img data-src="img/img4.jpg"
-                                        src="img/img4.jpg" class="js-img" alt=""></a></div>
+                            <div class="popular_item_img"><a href="/news/show/{{_id}}"><img data-src="/{{img}}" src="/{{img}}" class="js-img" alt="" /></a>
+                            </div>
                             <div class="popular_item_cont">
-                                <div class="popular_item_title"><a href="article.html">the best indoor plants to create
-                                        comfort ...</a></div>
+                                <div class="popular_item_title"><a href="/news/show/{{_id}}">{{title}}</a></div>
                                 <div class="popular_item_infoline infoline">
-                                    <div class="infoline_date">Jul 06</div> <span class="dash"></span>
-                                    <div class="infoline_tag"><span class="icon-comm"></span>5</div>
+                                    <div class="infoline_date">{{createdAt}}</div> <span class="dash"></span>
+                                    <div class="infoline_tag"><span class="icon-comm"></span>{{comments.length}}</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="popular_item">
-                            <div class="popular_item_img"><a href="article.html"><img data-src="img/img5.jpg"
-                                        src="img/img5.jpg" class="js-img" alt=""></a></div>
-                            <div class="popular_item_cont">
-                                <div class="popular_item_title"><a href="article.html">a set of the most necessary
-                                        things ...</a></div>
-                                <div class="popular_item_infoline infoline">
-                                    <div class="infoline_date">Jul 06</div> <span class="dash"></span>
-                                    <div class="infoline_tag"><span class="icon-comm"></span>5</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="popular_item">
-                            <div class="popular_item_img"><a href="article.html"><img data-src="img/img6.jpg"
-                                        src="img/img6.jpg" class="js-img" alt=""></a></div>
-                            <div class="popular_item_cont">
-                                <div class="popular_item_title"><a href="article.html">only here are the most beautiful
-                                        sunsets</a></div>
-                                <div class="popular_item_infoline infoline">
-                                    <div class="infoline_date">Jul 06</div> <span class="dash"></span>
-                                    <div class="infoline_tag"><span class="icon-comm"></span>5</div>
-                                </div>
-                            </div>
-                        </div>
+                        {{/each}}
                     </div>
                 </div>
             </aside>
         </div>
     </div>
 </section>
+
+<script>
+    let pagenavi = document.querySelector('.pagenavi')
+    let count = pagenavi.getAttribute('data-count')
+    for(i=0; i<count; i++){
+        pagenavi.innerHTML += `     
+            <a href="/category/show/{{category._id}}?page=${i}">${i+1}</a>
+        `
+    }
+
+</script>

@@ -41,31 +41,32 @@
                         </div>
                     </div>
                 </article>
-                <div class="comments_form">
-                    <h3>Leave a comment</h3>
-                    <form id="form">
+                <div class="comments_form" id=" ">
+                    <h3>O'z izohingizni qoldiring...</h3>
+                    <form id="form" action="/news/newcomment/{{news._id}}" method="post">
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
                         <div class="form_cols">
                             <div class="form_cols_item">
                                 <div class="form_row">
-                                    <input type="text" class="form-control" placeholder="Your name" name="name" />
+                                    <input type="text" class="form-control" placeholder="O'zingizni tanishtiring" name="name" required/>
                                 </div>
                             </div>
                             <div class="form_cols_item">
                                 <div class="form_row">
-                                    <input type="tel" class="form-control" placeholder="+1 (___) ___ __ __"
-                                        name="tel" />
+                                    <input type="tel" class="form-control" placeholder="+998 (___) ___ __ __"
+                                        name="phone" required/>
                                 </div>
                             </div>
                             <div class="form_cols_item">
                                 <div class="form_row">
-                                    <input type="email" class="form-control" placeholder="Your email" name="email" />
+                                    <input type="email" class="form-control" placeholder="Email manzilingiz" name="email" required/>
                                 </div>
                             </div>
                         </div>
                         <div class="form_row">
-                            <textarea class="form-control" placeholder="Enter your comment" name="comment"></textarea>
+                            <textarea class="form-control" placeholder="Izoh matningizni qoldiring" name="text" required></textarea>
                         </div>
-                        <div class="form_btn"><button class="btn">post comment</button></div>
+                        <div class="form_btn"><button class="btn">Jo'natish</button></div>
                     </form>
                 </div>
                 <a href="#" class="bann"><img data-src="img/bad1.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACw="

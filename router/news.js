@@ -67,7 +67,6 @@ router.post('/save',auth,upload.single('img'),async(req,res)=>{
     res.redirect('/news')
 })
 
-
 router.get('/view/:id',auth,async(req,res)=>{
     let _id = req.params.id
     let newsEl = await News
@@ -84,7 +83,8 @@ router.get('/view/:id',auth,async(req,res)=>{
     newsEl.topweek = newsEl.topweek == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
     newsEl.slider = newsEl.slider == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
 
-    newsEl.comments = newsEl.comments.map(comment =>{
+    newsEl.comments = newsEl.comments.map((comment,index) =>{
+        comment.index = index + 1
         comment.createdAt = comment.createdAt.toLocaleString()
         comment.status = newsEl.status == 1 ?'<span class="badge badge-primary">Faol</span>':'<span class="badge badge-danger">Nofaol</span>'
         return comment
@@ -113,6 +113,15 @@ router.get('/deletecomment/:id/:index',async(req,res)=>{
     let index = req.params.index
     let news = await News.findOne({_id})
     news.comments.splice(index,1)
+    await News.findByIdAndUpdate(_id,news)
+    res.redirect('/news/view/'+_id)
+})
+
+router.get('/changecomment/:id/:index',async(req,res)=>{
+    let _id = req.params.id
+    let index = req.params.index
+    let news = await News.findOne({_id})
+    news.comments[index].status = news.comments[index].status == 0 ? 1 : 0
     await News.findByIdAndUpdate(_id,news)
     res.redirect('/news/view/'+_id)
 })

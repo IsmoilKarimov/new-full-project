@@ -98,15 +98,18 @@
         <tbody>
             {{#each news.comments}}
                 <tr>
-                    <td>{{@index}}</td>
+                    <td>{{index}}</td>
                     <td>{{name}}</td>
                     <td>{{phone}}</td>
                     <td>{{email}}</td>
                     <td>{{text}}</td>
                     <td>{{createdAt}}</td>
-                    <td>{{{status}}}</td>
                     <td>
-                        <a href="/news/deletecomment/{{@root.news._id}}/{{@index}}" class="badge badge-danger " onclick="return confirm('Qaroringiz qat`iymi?')"><i class="fas fa-times"></i></a>
+                        <a href="/news/changecomment/{{@root.news._id}}/{{@index}}">{{{status}}}</a>
+                    </td>
+                    <td>
+                        {{!-- <a href="/news//{{@root.news._id}}/{{@index}}" class="badge badge-warning" onclick="edit()">Tahrirlash</a> --}}
+                        <a href="/news/deletecomment/{{@root.news._id}}/{{@index}}" class="badge badge-danger ml-2" onclick="return confirm('Qaroringiz qat`iymi?')"><i class="fas fa-times"></i></a>
                     </td>
                 </tr>
             {{/each}}

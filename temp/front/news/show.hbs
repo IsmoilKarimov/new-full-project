@@ -41,7 +41,7 @@
                         </div>
                     </div>
                 </article>
-                <div class="comments_form" id=" ">
+                <div class="comments_form" id="comments">
                     <h3>O'z izohingizni qoldiring...</h3>
                     <form id="form" action="/news/newcomment/{{news._id}}" method="post">
                     <input type="hidden" name="_csrf" value="{{csrf}}">
@@ -69,6 +69,11 @@
                         <div class="form_btn"><button class="btn">Jo'natish</button></div>
                     </form>
                 </div>
+                {{#if success}}
+                    <div class="comments__info">
+                        {{success}}
+                    </div>
+                {{/if}}
                 <a href="#" class="bann"><img data-src="img/bad1.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACw="
                         class="js-img" alt="" /></a>
             </div>

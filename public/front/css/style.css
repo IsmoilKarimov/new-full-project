@@ -119,6 +119,13 @@ input[type=submit], input[type=button], button { -webkit-appearance: none; outli
 
 .slick-dots .slick-active button { background-color: #f1f69f; }
 
+.comments__info {
+  background-color: #23a35f;
+  color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+}
+
 /*
 ================================================================================
 |                                     HEADER                                   |

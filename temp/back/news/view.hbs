@@ -104,8 +104,10 @@
                     <td>{{email}}</td>
                     <td>{{text}}</td>
                     <td>{{createdAt}}</td>
-                    <td>{{status}}</td>
-                    <td></td>
+                    <td>{{{status}}}</td>
+                    <td>
+                        <a href="/news/deletecomment/{{@root.news._id}}/{{@index}}" class="badge badge-danger " onclick="return confirm('Qaroringiz qat`iymi?')"><i class="fas fa-times"></i></a>
+                    </td>
                 </tr>
             {{/each}}
         </tbody>

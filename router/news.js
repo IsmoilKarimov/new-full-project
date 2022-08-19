@@ -83,6 +83,13 @@ router.get('/view/:id',auth,async(req,res)=>{
     newsEl.hot = newsEl.hot == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
     newsEl.topweek = newsEl.topweek == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
     newsEl.slider = newsEl.slider == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
+
+    newsEl.comments = newsEl.comments.map(comment =>{
+        comment.createdAt = comment.createdAt.toLocaleString()
+        comment.status = newsEl.status == 1 ?'<span class="badge badge-primary">Faol</span>':'<span class="badge badge-danger">Nofaol</span>'
+        return comment
+    }) 
+
     res.render('back/news/view',{
         news: newsEl,
         layout: 'back',
@@ -91,9 +98,29 @@ router.get('/view/:id',auth,async(req,res)=>{
     })   
 })
 
-router.get('/show/:id', async(req,res)=>{
+router.post('/newcomment/:id', async(req,res)=>{
+    let {name,email,text,phone} = req.body
     let _id = req.params.id
     let news = await News.findOne({_id})
+    news.comments.push({name,email,text,phone})
+    await news.save()
+    req.flash('success','Izohingiz saqlandi, tez orada izoh ko`rib chiqiladi!')
+    res.redirect(`/news/show/${_id}#comments`)
+})
+
+router.get('/deletecomment/:id/:index',async(req,res)=>{
+    let _id = req.params.id
+    let index = req.params.index
+    let news = await News.findOne({_id})
+    news.comments.splice(index,1)
+    await News.findByIdAndUpdate(_id,news)
+    res.redirect('/news/view/'+_id)
+})
+
+router.get('/show/:id', async(req,res)=>{
+    let _id = req.params.id
+    let news = await News
+    .findOne({_id})
     .populate('category')
     .populate('author') 
     .lean()       
@@ -135,7 +162,8 @@ router.get('/show/:id', async(req,res)=>{
         news,
         others,
         categories,
-        popular
+        popular,
+        success: req.flash('success')
     })
 })
 
@@ -144,16 +172,6 @@ router.get('/delete/:id',auth,async(req,res)=>{
     await News.findByIdAndRemove({_id})
     req.flash('success','Maqola bazadan o`chirildi!')
     res.redirect('/news')
-})
-
-router.post('/newcomment/:id', async(req,res)=>{
-    let {name,email,text,phone} = req.body
-    let _id = req.params.id
-    let news = await News.findOne({_id})
-    news.comments.push({name,email,text,phone})
-    await news.save()
-    req.flash('success','Izohingiz saqlandi, tez orada ko`rib chiqiladi!')
-    res.redirect(`/news/show/${_id}`)
 })
 
 router.get('/:id',async(req,res)=>{

@@ -73,7 +73,7 @@
                                 </div>
                                 {{/each}}
                             </div>
-                            <div class="stories_btn"><a href="/news/all" class="btn">Barchasini ko'rish</a></div>
+                            <div class="stories_btn"><a href="/news/all" class="btn">Barchasi</a></div>
                         </div>
                     </aside>
                 </div>
@@ -162,6 +162,14 @@
                     </div>
                 </div>
                 <aside class="columns_sidebar sidebar">
+                    <div class="sidebar_search">
+                        <form action="/news/search?_csrf={{csrf}}" method="post">
+                            <div class="search">
+                                <input type="text" name="search" class="form-control" placeholder="Izlash..." />
+                                <button class="btn"><span class="icon-search"></span></button>
+                            </div>
+                        </form>
+                    </div>
                     <div class="section_title">
                         <h2>Bo'limlar</h2>
                     </div>

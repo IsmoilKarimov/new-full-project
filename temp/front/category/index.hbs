@@ -40,9 +40,9 @@
             </div>
             <aside class="columns_sidebar sidebar">
                 <div class="sidebar_search">
-                    <form>
+                    <form action="/news/search?_csrf={{csrf}}" method="post">
                         <div class="search">
-                            <input type="text" class="form-control" placeholder="Search..." />
+                            <input type="text" name="search" class="form-control" placeholder="Izlash..." />
                             <button class="btn"><span class="icon-search"></span></button>
                         </div>
                     </form>

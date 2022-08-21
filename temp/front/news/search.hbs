@@ -1,0 +1,58 @@
+<section class="section-readed">
+        <div class="wrapper">
+            <a href="#" class="bann"><img data-src="img/bad4.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACw="
+                    class="js-img" alt="" /></a>
+            <div class="columns" id="mostreaded">
+                <div class="columns_center">
+                    <div class="section_title">
+                        <h2>{{title}}</h2>
+                        <a href="/news/mostview" class="link-view">Barchasi<span class="icon-arr"></span></a>
+                    </div>
+                    <div class="readed">
+                        {{#each news}}
+                            <div class="readed_item">
+                            <div class="readed_item_img">
+                                <a href="/news/show/{{_id}}"><img data-src="/{{img}}"
+                                        src="/{{img}}" class="js-img" alt="" /></a>
+                                <div class="readed_item_cats cats">
+                                    <a href="/category/show/{{category._id}}" class="cats_item">{{category.title}}</a>
+                                </div>
+                            </div>
+                            <div class="readed_item_cont">
+                                <div class="readed_item_title"><a href="/news/show/{{_id}}">{{title}}</a></div>
+                                <div class="readed_item_infoline infoline">
+                                    <div class="infoline_date">{{createdAt}}</div> <span class="dash"></span>
+                                    <div class="infoline_author">
+                                        <div class="ava"><img data-src="/{{author.avatar}}"
+                                                src="/{{author.avatar}}" class="js-img"
+                                                alt="" /></div>
+                                        {{author.name}}
+                                    </div>
+                                    <a href="/news/show/{{_id}}" class="btn-arr"><span class="icon-arrow"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+                <aside class="columns_sidebar sidebar">
+                    <div class="sidebar_search">
+                        <form action="/news/search?_csrf={{csrf}}" method="post">
+                            <div class="search">
+                                <input type="text" name="search" class="form-control" placeholder="Izlash..." />
+                                <button class="btn"><span class="icon-search"></span></button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="section_title">
+                        <h2>Bo'limlar</h2>
+                    </div>
+                    <div class="sidebar_widget">
+                        <ul class="catlist" id="statusCategory"></ul>
+                    </div>
+                    <a href="#" class="bann"><img data-src="img/bad2.jpg"
+                            src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt="" /></a>
+                </aside>
+            </div>
+        </div>
+    </section>

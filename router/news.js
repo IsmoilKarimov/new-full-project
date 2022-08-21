@@ -16,7 +16,8 @@ router.get('/',auth,async(req,res)=>{
     .lean()
     let category = await Category.find({status:1}).lean()
     let author = await Author.find({status:1}).lean()
-    news.map(newsEl =>{
+    news.map((newsEl,index) =>{
+        newsEl.index = index+1
         newsEl.status = newsEl.status == 1 ?'<span class="badge badge-primary">Faol</span>':'<span class="badge badge-danger">Nofaol</span>'
         newsEl.popular = newsEl.popular == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
         newsEl.bigpopular = newsEl.bigpopular == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
@@ -65,6 +66,84 @@ router.post('/save',auth,upload.single('img'),async(req,res)=>{
     await News.findByIdAndUpdate(_id,news)
     req.flash('success','Maqola ma`lumotlari yangilandi!')
     res.redirect('/news')
+})
+
+
+const kirlot = (text) => {								
+    let lat = {'a':'а','q':'қ','s':'с','d':'д','e':'е','r':'р','f':'ф','t':'т','g':'г','y':'й','h':'ҳ','u':'у','j':'ж','i':'и','k':'к','o':'о','l':'л','p':'п','z':'з','x':'х','s':'с','v':'в','b':'б','n':'н','m':'м','ch':'ч',' ':' '}
+    let kir = {'а':'a','қ':'q','с':'s','д':'d','е':'e','р':'r','ф':'f','т':'t','г':'g','й':'y','ҳ':'h','у':'u','ж':'j','и':'i','к':'k','о':'o','л':'l','п':'p','з':'z','х':'x','с':'s','в':'v','б':'b','н':'n','м':'m','ш':'sh','ч':'ch', ' ':' '}
+    let res = ''
+    text = text.toLowerCase().split('')
+    let letterCount = 0
+    while (letterCount < text.length) {
+        if (text[letterCount]+text[letterCount+1]=='sh') {
+            res+='ш'; letterCount+=2; continue
+        }
+        if (text[letterCount]+text[letterCount+1]=='ch') {
+            res+='ч'; letterCount+=2; continue
+        }
+        if (text[letterCount]+text[letterCount+1]=='yo') {
+            res+='ё'; letterCount+=2; continue
+        }
+        if (text[letterCount]+text[letterCount+1]=='ya') {
+            res+='я'; letterCount+=2; continue
+        }
+        if (text[letterCount]+text[letterCount+1]=="o'") {
+            res+='ў'; letterCount+=2; continue
+        }
+        if (text[letterCount]+text[letterCount+1]=="g'") {
+            res+='ғ'; letterCount+=2; continue
+        }
+        if (lat[text[letterCount]]) res+=lat[text[letterCount]]
+        if (kir[text[letterCount]]) res+=kir[text[letterCount]]
+        letterCount++
+    }
+    return res
+}
+
+router.post('/search',async(req,res)=>{
+    let {search} = req.body
+    let searchOther = kirlot(search)
+    let news = await News.find({
+        $or: [
+            {title: {$regex: search.toLowerCase(), $options: 'i'}},
+            {text: {$regex: search.toLowerCase(), $options: 'i'}},
+            {title: {$regex: searchOther.toLowerCase(), $options: 'i'}},
+            {text: {$regex: searchOther.toLowerCase(), $options: 'i'}},
+        ]
+    })
+    .select(['_id','title','description','img','category','author','createdAt'])
+    .lean()
+    
+    news = news.map(other => {
+        let newDate = new Date(other.createdAt)
+        other.createdAt = `${newDate.getDate()}-${newDate.getUTCMonth()}-${newDate.getFullYear()}`          
+        return other
+    })
+
+    res.render('front/news/search',{
+        title: `"${search}" so'zi bo'yicha qidiruv natijasi.`,
+        news
+    })
+})
+
+router.get('/all',async(req,res)=>{
+    let news = await News.find({status:1})
+    .sort({_id:-1})
+    .populate('author')
+    .populate('category')
+    .lean()
+
+    news = news.map(other => {
+        let newDate = new Date(other.createdAt)
+        other.createdAt = `${newDate.getDate()}-${newDate.getUTCMonth()}-${newDate.getFullYear()}`          
+        return other
+    })
+
+    res.render('front/news/search',{
+        title: `Barcha yangiliklar ro'yhati`,
+        news
+    })
 })
 
 router.get('/view/:id',auth,async(req,res)=>{

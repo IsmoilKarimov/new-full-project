@@ -6,7 +6,8 @@ const News = require('../model/news')
 
 router.get('/',auth,async(req,res)=> {
     let categories = await Category.find().lean()
-    categories.map(category => {
+    categories.map((category,index) => {
+        category.index = index+1
         category.status = category.status == 1 ?'<span class="badge badge-primary">Faol</span>':'<span class="badge badge-danger">Nofaol</span>'
         category.menu = category.menu == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
         category.footer = category.footer == 1 ?'<span class="badge badge-primary">Ha</span>':'<span class="badge badge-danger">Yo`q</span>'
@@ -47,6 +48,7 @@ router.post('/save',auth,async(req,res)=>{
     req.flash('success','Bo`lim qo`shildi!')
     res.redirect('/category')
 })
+
 
 // api 
 router.get('/get/:id',async(req,res)=>{         

@@ -86,7 +86,7 @@ router.get('/view/:id',auth,async(req,res)=>{
     newsEl.comments = newsEl.comments.map((comment,index) =>{
         comment.index = index + 1
         comment.createdAt = comment.createdAt.toLocaleString()
-        comment.status = newsEl.status == 1 ?'<span class="badge badge-primary">Faol</span>':'<span class="badge badge-danger">Nofaol</span>'
+        comment.status = comment.status == 1 ?'<span class="badge badge-primary">Faol</span>':'<span class="badge badge-danger">Nofaol</span>'
         return comment
     }) 
 
@@ -108,22 +108,22 @@ router.post('/newcomment/:id', async(req,res)=>{
     res.redirect(`/news/show/${_id}#comments`)
 })
 
-router.get('/deletecomment/:id/:index',async(req,res)=>{
+router.get('/deletecomment/:id/:index',auth,async(req,res)=>{
     let _id = req.params.id
     let index = req.params.index
     let news = await News.findOne({_id})
     news.comments.splice(index,1)
     await News.findByIdAndUpdate(_id,news)
-    res.redirect('/news/view/'+_id)
+    res.redirect(`/news/view/`+_id+'#comments')
 })
 
-router.get('/changecomment/:id/:index',async(req,res)=>{
+router.get('/changecomment/:id/:index',auth,async(req,res)=>{
     let _id = req.params.id
     let index = req.params.index
     let news = await News.findOne({_id})
-    news.comments[index].status = news.comments[index].status == 0 ? 1 : 0
+    news.comments[index].status = news.comments[index].status == 1 ? 0 : 1
     await News.findByIdAndUpdate(_id,news)
-    res.redirect('/news/view/'+_id)
+    res.redirect('/news/view/'+_id+'#comments')
 })
 
 router.get('/show/:id', async(req,res)=>{

@@ -10,13 +10,13 @@ fetch('/category/all')
     })                 
     data.menuCategory.forEach(category =>{
         menuCategory.innerHTML += `
-            <li><a href="/category/show/${category._id}">${category.title} (15)</a></li>                               `
+            <li><a href="/category/show/${category._id}">${category.title}</a></li>                               `
     })
     if(document.getElementById('statusCategory')){
         let statusCategory = document.getElementById('statusCategory')
         data.statusCategory.forEach(category => {
             statusCategory.innerHTML += `
-                <li><a href="/category/show/${category._id}">${category.title} (13)</a></li>
+                <li><a href="/category/show/${category._id}">${category.title} (${category.count})</a></li>
             `
         })
     }

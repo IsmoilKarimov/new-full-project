@@ -82,7 +82,7 @@
 
 <h4 class="mt-4 mb-3">Yangilikka yozilgan izohlar ro'yhati</h4>
 <div class="card">
-    <table class="table">
+    <table class="table" id="comments">
         <thead>
             <tr>
                 <th scope="col">№</th>
@@ -108,7 +108,6 @@
                         <a href="/news/changecomment/{{@root.news._id}}/{{@index}}">{{{status}}}</a>
                     </td>
                     <td>
-                        {{!-- <a href="/news//{{@root.news._id}}/{{@index}}" class="badge badge-warning" onclick="edit()">Tahrirlash</a> --}}
                         <a href="/news/deletecomment/{{@root.news._id}}/{{@index}}" class="badge badge-danger ml-2" onclick="return confirm('Qaroringiz qat`iymi?')"><i class="fas fa-times"></i></a>
                     </td>
                 </tr>

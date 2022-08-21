@@ -120,6 +120,11 @@ router.get('/show/:id', async(req,res)=>{
 
 router.get('/all',async(req,res)=>{
     let statusCategory = await Category.find({status:1}).lean()
+    statusCategory = await Promise.all(statusCategory.map(async category=>{
+        let news = await News.find({category:category._id}).select(['_id']).lean()
+        category.count = news.length
+        return category
+    }))
     let menuCategory = await Category.find({menu:1}).lean()
     let footerCategory = await Category.find({footer:1}).lean()
     res.send({statusCategory,menuCategory,footerCategory})

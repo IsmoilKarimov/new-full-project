@@ -106,6 +106,7 @@ router.post('/search',async(req,res)=>{
     let searchOther = kirlot(search)
     let news = await News.find({
         $or: [
+            {status:1},
             {title: {$regex: search.toLowerCase(), $options: 'i'}},
             {text: {$regex: search.toLowerCase(), $options: 'i'}},
             {title: {$regex: searchOther.toLowerCase(), $options: 'i'}},

@@ -1,0 +1,109 @@
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h5 class="card-title mb-0">{{title}}</h5>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Yangi sozlama
+            </button>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">№</th>
+                    <th scope="col">Sarlavhasi</th>
+                    <th scope="col">Kod qismi</th>
+                    <th scope="col">Qiymati</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each settings}}
+                <tr>
+                    <th scope="row">{{index}}</th>
+                    <td>{{title}}</td>
+                    <td>{{code}}</td>
+                    <td style="width: 50%;">{{value}}</td>
+                    <td class="text-right">
+                        <button onclick="edit('{{_id}}')" data-toggle="modal" data-target="#update"
+                            class="btn btn-warning"><i class="fas fa-pen"></i></button>
+
+                        <a href="/settings/delete/{{_id}}" onclick="return confirm('Qaroringiz aniqmi?')"
+                            class="btn btn-danger ml-2"><i class="fas fa-times"></i></a>
+                    </td>
+                </tr>
+                {{/each }}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Yangi sozlama</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body mb-4">
+                <form action="/settings/?_csrf={{csrf}}" method="post">
+                    <div class="form-group mb-2">
+                        <input type="text" name="title" class="form-control" placeholder="Sozlama sarlavhasi">
+                    </div>                               
+                    <div class="form-group mb-2">
+                        <input type="text" name="code" class="form-control" placeholder="Sozlama kodi">
+                    </div>                               
+                    <div class="form-group mb-2">
+                        <input type="text" name="value" class="form-control" placeholder="Sozlama qiymati">
+                    </div> 
+                    <button type="submit" class="btn btn-primary">Kiritish</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    style="display: none;">
+    <div class="modal-dialog" role="document">              
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tahrirlash</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">                                    
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body mb-4">
+                <form action="/settings/save/?_csrf={{csrf}}" method="post" name="editform">
+                    <input type="hidden" name="_id">
+                    <div class="form-group mb-2">
+                        <input type="text" name="title" class="form-control" placeholder="Sozlama sarlavhasi">
+                    </div>
+                    <div class="form-group mb-2">
+                        <input type="text" name="code" class="form-control" placeholder="Sozlama kodi">
+                    </div>
+                    <div class="form-group mb-2">
+                        <input type="text" name="value" class="form-control" placeholder="Sozlama qiymati">
+                    </div>                    
+                    <button type="submit" class="btn btn-primary">Saqlash</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let form = document.forms.editform
+    const edit = (id) => {  
+        fetch(`/settings/${id}`)
+            .then(res => res.json()) 
+            .then(setting => {
+                form._id.value = setting._id 
+                form.title.value = setting.title 
+                form.code.value = setting.code 
+                form.value.value = setting.value 
+            })
+    }
+</script>

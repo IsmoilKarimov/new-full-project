@@ -14,6 +14,7 @@ const userRouter = require('./router/user')
 const categoryRouter = require('./router/category')
 const authorRouter = require('./router/author')
 const newsRouter = require('./router/news')
+const settingsRouter = require('./router/settings')
 
 const hbs = expHbs.create({
     defaultLayout: 'front',
@@ -63,6 +64,7 @@ app.use('/user', userRouter)
 app.use('/category', categoryRouter)
 app.use('/author', authorRouter)
 app.use('/news', newsRouter)
+app.use('/settings', settingsRouter)
  
 const PORT = 3003
 async function dev(){

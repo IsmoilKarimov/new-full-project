@@ -21,3 +21,7 @@ fetch('/category/all')
         })
     }
 })
+
+fetch('/settings/all')
+.then(res => res.json())
+.then(data => console.log(data))

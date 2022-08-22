@@ -1,7 +1,7 @@
 <div class="d-flex align-items-center mb-4">
     <h5 class="card-title">{{news.title}}</h5>
     <button onclick="edit('{{_id}}')" class="btn btn-warning ml-auto">Tahrirlash</button>
-    <a href="/news/delete/{{_id}}" class="btn btn-danger ml-2"
+    <a href="/news/view/delete/{{_id}}" class="btn btn-danger ml-2"
         onclick="return confirm('Qaroringiz aniqmi?')">O'chirish</a>
 </div>
 <div class="row">
@@ -19,7 +19,7 @@
                 </p>
                 <hr>
                 <h6>To'liq matn</h6>
-                {{news.text}}
+                {{{news.text}}}
             </div>
         </div>
     </div>

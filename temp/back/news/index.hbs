@@ -21,6 +21,7 @@
                     <th scope="col">Big popular</th>
                     <th scope="col">Top week</th>
                     <th scope="col">Izohlar</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -38,6 +39,9 @@
                     <td><a href="/news/change/bigpopular/{{_id}}/news">{{{bigpopular}}}</a></td>
                     <td><a href="/news/change/topweek/{{_id}}/news">{{{topweek}}}</a></td>
                     <td><a href="/news/change/comments/{{_id}}/news">{{{comments.length}}}</a></td>
+                    <td>
+                        <a href="/news/delete/{{_id}}" class="btn btn-danger ml-2" onclick="return confirm('Qaroringiz aniqmi?')">O'chirish</a>
+                    </td>
                 </tr>
                 {{/each }}
             </tbody>
@@ -191,10 +195,9 @@
 </div>
 
 
-<script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
 <script>
 
-    CKEDITOR.replace('text')        
+    CKEDITOR.replace( 'text' );        
 
     let form = document.forms.editform
     let avatar = document.getElementById('avatar')
@@ -207,4 +210,8 @@
                 avatar.setAttribute('src',author.avatar)
             })
     }   
+
+
+
+
 </script>

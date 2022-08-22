@@ -7,7 +7,6 @@ router.get('/',auth,async(req,res)=>{
     let settings = await Settings.find().lean()
     settings.map((setting,index) =>{
         setting.index = index+1
-        setting.status = setting.status == 1 ?'<span class="badge badge-primary">Faol</span>':'<span class="badge badge-danger">Nofaol</span>'
         return setting
     })
     res.render('back/settings/index',{
@@ -24,6 +23,16 @@ router.post('/',auth,async(req,res)=>{
     await newSettings.save()
     req.flash('success','Yangi sozlama qo`shildi!')
     res.redirect('/settings')
+})
+
+
+router.get('/all',async(req,res)=>{
+    let settings = {}
+    let data = await Settings.find().lean()
+    data.forEach(item => {
+        settings[item.code] = item.value
+    })
+    res.send(settings)
 })
 
 router.post('/save',auth,async(req,res)=>{
@@ -47,21 +56,11 @@ router.get('/:id',async(req,res)=>{
     res.send(setting)
 })
 
-router.get('/all',async(req,res)=>{
-    let settings = {}
-
-    let data = await Settings.find().lean()
-    data.forEach(item => {
-        settings[item.code] = item.value
-    })
-    res.send(settings)
-})
-
 router.get('/change/:id',async(req,res)=>{
     let _id = req.params.id
     let setting = await Settings.findOne({_id})
     await setting.save()
-    res.redirect('/setting') 
+    res.redirect('/settings') 
 })
 
 module.exports = router

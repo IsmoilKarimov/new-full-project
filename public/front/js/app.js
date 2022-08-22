@@ -24,4 +24,14 @@ fetch('/category/all')
 
 fetch('/settings/all')
 .then(res => res.json())
-.then(data => console.log(data))
+.then(data => {
+
+    document.getElementById('footer_text').textContent = data.footer_text
+    document.getElementById('facebook').setAttribute('href',data.facebook)
+    document.getElementById('twitter').setAttribute('href',data.twitter)
+    document.getElementById('youtube').setAttribute('href',data.youtube)
+    document.getElementById('instagram').setAttribute('href',data.instagram)
+    document.getElementById('copyright').textContent = data.copyright
+    // document.getElementById('myEmail').textContent = data.myEmail
+
+})
